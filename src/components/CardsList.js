@@ -17,7 +17,7 @@ const CardsList = (props) => {
     });
   }, [props.board]);
 
-  const deleteCardItem = (card) => {
+  const deleteCard = (card) => {
     axios.delete(`${process.env.REACT_APP_BACKEND_URL}/cards/${card.card_id}`).then((response) => {
       const newCardsData = cardsData.filter((existingCard) => {
         return existingCard.card_id !== card.card_id;
@@ -45,7 +45,7 @@ const CardsList = (props) => {
     return (<Card
         card={card}
         plusOneCardItem={plusOneCardItem}
-        deleteCardItem={deleteCardItem}></Card>)
+        deleteCardItem={deleteCard}></Card>)
   });
 
   const postNewCard = (message) => {

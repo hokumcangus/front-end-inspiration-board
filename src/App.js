@@ -8,7 +8,7 @@ import Board from './components/Board';
 
 function App() {
   const [showAddCard, setShowAddCard] = useState([]);
-  const [cards,, setCards] = useState([
+  const [cards, setCards] = useState([
     {
       'cardId': 1,
       'message': 'Good day'
@@ -19,10 +19,30 @@ function App() {
     }
   ]);
 
-  const addCard = (card)
+  const [boardsData, setBoardsData] = useState([
+    {
+      'boardId': 1,
+      'title': 'Board 1',
+      'owner': 'Hoku & Anika'
+    },
+    {
+      'boardId': 2,
+      'title': 'Board 2',
+      'owner': 'Alaere & Mia'
+    }
+  ]);
+
 
   
-  const [boardsData, setBoardsData] = useState([]);
+
+  // const addCard = (card) => {
+  //   setCards([...cards, card])
+  // };
+
+
+
+  
+  // const [boardsData, setBoardsData] = useState([]);
   const [selectedBoard, setSelectedBoard] = useState({
     title: '',
     owner: '',
@@ -59,6 +79,8 @@ function App() {
   const [isBoardFormVisible, setIsBoardFormVisible] = useState(true);
   const toggleNewBoardForm = () => {setIsBoardFormVisible(!isBoardFormVisible)}
 
+  
+  
   const deleteAll = () => {
     if (window.confirm('Are you really sure? Please be gentle with this demo.')) {
       axios.delete(`${process.env.REACT_APP_BACKEND_URL}/destroy_all`).then((response) => {
@@ -81,7 +103,7 @@ function App() {
       <header></header>
       <body className="content__container">
         <section> 
-          <h1>Inspiration Board</h1>
+          <h1>2023 Inspiration Board</h1>
           <section className="boards__container">
           {/* </section> */}
             <h2>Boards</h2>
