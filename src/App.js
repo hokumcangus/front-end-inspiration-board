@@ -1,4 +1,5 @@
 import './App.css';
+import React from 'react';
 import {useEffect, useState} from 'react';
 import axios from 'axios';
 import CardsList from './components/CardsList';
@@ -6,7 +7,21 @@ import NewBoardForm from './components/NewBoardForm';
 import Board from './components/Board';
 
 function App() {
+  const [showAddCard, setShowAddCard] = useState([]);
+  const [cards,, setCards] = useState([
+    {
+      'cardId': 1,
+      'message': 'Good day'
+    },
+    {
+      'cardId': 2,
+      'message': 'It is a beautiful day'
+    }
+  ]);
 
+  const addCard = (card)
+
+  
   const [boardsData, setBoardsData] = useState([]);
   const [selectedBoard, setSelectedBoard] = useState({
     title: '',
@@ -41,7 +56,6 @@ function App() {
     });
   }
 
-
   const [isBoardFormVisible, setIsBoardFormVisible] = useState(true);
   const toggleNewBoardForm = () => {setIsBoardFormVisible(!isBoardFormVisible)}
 
@@ -64,10 +78,12 @@ function App() {
 
   return (
     <div className="page__container">
-      <div className="content__container">
-        <h1>Inspiration Board</h1>
-        <section className="boards__container">
-          <section>
+      <header></header>
+      <body className="content__container">
+        <section> 
+          <h1>Inspiration Board</h1>
+          <section className="boards__container">
+          {/* </section> */}
             <h2>Boards</h2>
             <ol className="boards__list">
               {boardsElements}
@@ -84,7 +100,7 @@ function App() {
           </section>
         </section>
         {selectedBoard.board_id ? <CardsList board={selectedBoard}></CardsList> : ''}
-      </div>
+      </body>
       <footer><span></span> Click <span onClick={deleteAll} className="footer__delete-btn">here</span> to delete all boards and cards!</footer>
     </div>
   );
