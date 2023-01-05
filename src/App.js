@@ -7,42 +7,58 @@ import NewBoardForm from './components/NewBoardForm';
 import Board from './components/Board';
 
 function App() {
-  const [showAddCard, setShowAddCard] = useState([]);
-  const [cards, setCards] = useState([
-    {
-      'cardId': 1,
-      'message': 'Good day'
-    },
-    {
-      'cardId': 2,
-      'message': 'It is a beautiful day'
-    }
-  ]);
-
-  const [boardsData, setBoardsData] = useState([
-    {
-      'boardId': 1,
-      'title': 'Board 1',
-      'owner': 'Hoku & Anika'
-    },
-    {
-      'boardId': 2,
-      'title': 'Board 2',
-      'owner': 'Alaere & Mia'
-    }
-  ]);
-
-
+  // const [showAddCard, setShowAddCard] = useState([]);
+  // const [cards, setCards] = useState([
+  //   {
+  //     'cardId': 1,
+  //     'message': 'Good day'
+  //   },
+  //   {
+  //     'cardId': 2,
+  //     'message': 'It is a beautiful day'
+  //   }
+  // ]);
+  // const [boardsData, setBoardsData] = useState([
+  //   {
+  //     'boardId': 1,
+  //     'title': 'Board 1',
+  //     'owner': 'Hoku & Anika'
+  //   },
+  //   {
+  //     'boardId': 2,
+  //     'title': 'Board 2',
+  //     'owner': 'Alaere & Mia'
+  //   }
+  // ]);
+  const Data = [
+    {board_id:1, 
+      title:"board1",
+      owner:"Hoku & Anika",
+  
+      cards: [{card_id:1, 
+            message: "This is card 1",
+            }, 
+            
+            {card_id:2, 
+            message:"This is card 2",
+            }]
+          }, 
+    {board_id:2, 
+      title:"Board2",
+      owner:"Alaere & Mia",
+  
+      cards: [{card_id:3, 
+            message: "This is card 3",
+            }, 
+            
+            {card_id:4, 
+            message:"This is card 4",
+            }]
+          }]
+  console.log(Data[0])
   
 
-  // const addCard = (card) => {
-  //   setCards([...cards, card])
-  // };
-
-
-
-  
-  // const [boardsData, setBoardsData] = useState([]);
+  const [boardsData, setBoardsData] = useState([]);
   const [selectedBoard, setSelectedBoard] = useState({
     title: '',
     owner: '',
