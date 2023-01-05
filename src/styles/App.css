@@ -1,0 +1,35 @@
+h1 {
+    font-family: "Splash";
+    font-size: 5rem;
+    text-align: center;
+    padding-top: 40px; 
+    padding-bottom: 30px;   
+}
+
+h2 {
+    text-align: center;
+}
+
+footer {
+    text-align: center;
+    padding-top: 25px;
+    padding-bottom: 50px;
+}
+
+.listOfBoards li:hover {
+    background-color: #ffc39d;
+}
+
+.flexbox {
+    max-height: 300px;
+    margin-left: 20px;
+    margin-right: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.toggleNewBoardForm:hover {
+    color: #fe9e44;
+    text-decoration: underline;
+}
