@@ -1,20 +1,24 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 const NewCardForm = (props) => {
-  const [message, setMessage] = useState('');
-  const handleMessageChange = (e) => { setMessage(e.target.value) };
+  const [message, setMessage] = useState("");
+  const handleMessageChange = (e) => {
+    setMessage(e.target.value);
+  };
 
-  const submitNewCard = (e) => {
+  const createNewCard = (e) => {
     e.preventDefault();
     props.postNewCard(message);
-    setMessage('');
+    setMessage("");
   };
 
   return (
-    <section className="new-card-form__container">
+    <section>
       <h2>Create a New Card</h2>
-      <form onSubmit={submitNewCard} className="new-card-form__form">
+      <p>Enter details below and click Create</p>
+      <form onSubmit={createNewCard} className="newCardForm">
         <label>Message</label>
+        <br />
         <input
           type="text"
           className={
@@ -26,11 +30,14 @@ const NewCardForm = (props) => {
           value={message}
         ></input>
         <p>Preview: {message}</p>
-        <input
+        {/* <input
           type="Submit"
           disabled={message.length === 0 || message.length > 40}
           className="new-card-form__form-submit-btn"
-        ></input>
+        ></input> */}
+        <button type="Submit" className="submitBtn">
+          Create
+        </button>
       </form>
     </section>
   );

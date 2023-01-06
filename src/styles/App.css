@@ -16,6 +16,22 @@ footer {
     padding-bottom: 50px;
 }
 
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    list-style-type: none;
+}
+
+.listOfBoards {
+    border: 2px solid #000;
+    max-height: 10rem;
+    min-height: 10rem;
+    overflow: scroll;
+}
+
 .listOfBoards li:hover {
     background-color: #ffc39d;
 }

@@ -19,18 +19,18 @@ function App() {
   //   },
   // ]);
 
-  const [boardsData, setBoardsData] = useState([
-    {
-      boardId: 1,
-      title: "Board 1",
-      owner: "Hoku & Anika",
-    },
-    {
-      boardId: 2,
-      title: "Board 2",
-      owner: "Alaere & Mia",
-    },
-  ]);
+  // const [boardsData, setBoardsData] = useState([
+  //   {
+  //     boardId: 1,
+  //     title: "Board 1",
+  //     owner: "Hoku & Anika",
+  //   },
+  //   {
+  //     boardId: 2,
+  //     title: "Board 2",
+  //     owner: "Alaere & Mia",
+  //   },
+  // ]);
 
   // const addCard = (card) => {
   //   setCards([...cards, card])
@@ -57,33 +57,82 @@ function App() {
   //     'owner': 'Alaere & Mia'
   //   }
   // ]);
-  const Data = [
+  const [boardsData, setBoardsData] = useState([
     {
-      board_id: 1,
+      boardId: 1,
       title: "board1",
       owner: "Hoku & Anika",
 
       cards: [
-        { card_id: 1, message: "This is card 1" },
+        { cardId: 1, message: "This is card 1" },
 
-        { card_id: 2, message: "This is card 2" },
+        { cardId: 2, message: "This is card 2" },
       ],
     },
     {
-      board_id: 2,
+      boardId: 2,
       title: "Board2",
       owner: "Alaere & Mia",
 
       cards: [
-        { card_id: 3, message: "This is card 3" },
+        { cardId: 3, message: "This is card 3" },
 
-        { card_id: 4, message: "This is card 4" },
+        { cardId: 4, message: "This is card 4" },
       ],
     },
-  ];
-  console.log(Data[0]);
+  ]);
+  // console.log(Data[0]);
 
-  const [boardsData, setBoardsData] = useState([]);
+  // const Card = (props) => {
+  //   return (
+  //     <div className='card'>
+  //       <section>
+  //         <p className='card-message'>{props.card.message}</p>
+  //         <ul className='card-controls'>
+  //           <li><p>{props.card.likes_count} 💕</p></li>
+  //           <li><p onClick={() => props.plusOneCardItem(props.card)}>+1</p></li>
+  //           <li><p className='card-delete' onClick={() => props.deleteCard(props.card)}>Delete</p></li>
+  //         </ul>
+  //       </section>
+  //   </div>);
+  // };
+
+  // const cardElements = cardsData.map((card) => {
+  //   return (
+  //     <Card
+  //       card={card}
+  //       plusOneCardItem={plusOneCardItem}
+  //       deleteCardItem={deleteCard}
+  //     ></Card>
+  //   );
+  // });
+
+  // const CardsList = () => {
+  //   const [cardsData, setCardsData] = useState([
+  //     {
+  //       boardId: 1,
+  //       cardId: 1,
+  //       message: "This is card 1",
+  //     },
+  //     {
+  //       boardId: 1,
+  //       cardId: 2,
+  //       message: "This is card 2",
+  //     },
+  //     {
+  //       boardId: 2,
+  //       cardId: 3,
+  //       message: "This is card 3",
+  //     },
+  //     {
+  //       boardId: 2,
+  //       cardId: 4,
+  //       message: "This is card 4",
+  //     },
+  //   ]);
+  // };
+
+  // const [boardsData, setBoardsData] = useState([]);
   const [selectedBoard, setSelectedBoard] = useState({
     title: "",
     owner: "",
@@ -187,7 +236,7 @@ function App() {
             </span>
           </section>
         </section>
-        {selectedBoard.board_id ? (
+        {selectedBoard.boardId ? (
           <CardsList board={selectedBoard}></CardsList>
         ) : (
           ""
