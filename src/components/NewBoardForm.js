@@ -55,7 +55,7 @@ const NewBoardForm = (props) => {
         }
         className="new-board-form__form-submit-btn"
       ></input> */}
-      <button type="Submit" className="realTime">
+      <button type="Submit" className="submitBtn">
         Create
       </button>
     </form>

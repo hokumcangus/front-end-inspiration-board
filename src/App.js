@@ -89,7 +89,7 @@ function App() {
   //       <section>
   //         <p className='card-message'>{props.card.message}</p>
   //         <ul className='card-controls'>
-  //           <li><p>{props.card.likes_count} 💕</p></li>
+  //           <li><p>{props.card.likesCount} ❤️</p></li>
   //           <li><p onClick={() => props.plusOneCardItem(props.card)}>+1</p></li>
   //           <li><p className='card-delete' onClick={() => props.deleteCard(props.card)}>Delete</p></li>
   //         </ul>
@@ -202,11 +202,18 @@ function App() {
   // };
 
   return (
-    <div className="parentWrap">
+    <div>
       <header>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
         <h1>Inspiration Board</h1>
       </header>
-      <body>
+      <body className="text-in-front">
         <section className="flexbox">
           <section>
             <h2>List of Boards</h2>
@@ -229,6 +236,7 @@ function App() {
             ) : (
               ""
             )}
+            <br />
             <span onClick={toggleNewBoardForm} className="toggleNewBoardForm">
               {isBoardFormVisible
                 ? "Hide New Board Form"
