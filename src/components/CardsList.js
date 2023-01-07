@@ -43,7 +43,7 @@ const CardsList = (props) => {
         const newCardsData = cardsData.map((existingCard) => {
           return existingCard.cardId !== card.cardId
             ? existingCard
-            : { ...card, likes_count: card.likes_count + 1 };
+            : { ...card, likesCount: card.likesCount + 1 };
         });
         setCardsData(newCardsData);
       })

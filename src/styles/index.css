@@ -4,7 +4,6 @@
 
 .indexBody {
     background-image: url(/src/assets/background.png);
-    /* opacity: 80%; */
     background-size: contain;
     background-repeat: no-repeat;
     background-position: top;
