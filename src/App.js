@@ -40,7 +40,7 @@ function App() {
 
 	useEffect(() => {
 		axios
-			.get(`${process.env.REACT_APP_BACKEND_URL}`, {})
+			.get(`${process.env.REACT_APP_BACKEND_URL}/boards`, {})
 			.then((response) => {
 				setBoardsData(response.data);
 			});
@@ -64,7 +64,7 @@ function App() {
 
 	const createNewBoard = (newBoard) => {
 		axios
-			.post(`${process.env.REACT_APP_BACKEND_URL}`, newBoard)
+			.post(`${process.env.REACT_APP_BACKEND_URL}/boards`, newBoard)
 			.then((response) => {
 				console.log("Response:", response.data.board);
 				const boards = [...boardsData];
@@ -84,7 +84,7 @@ function App() {
 
 	return (
 		<div>
-			<header>
+			<section>
 				<br />
 				<br />
 				<br />
@@ -93,8 +93,8 @@ function App() {
 				<br />
 				<br />
 				<h1>Inspiration Board</h1>
-			</header>
-			<body>
+			</section>
+			<section>
 				<section className="grid">
 					<section>
 						<h2>List of Boards</h2>
@@ -131,13 +131,15 @@ function App() {
 					<CardsList board={selectedBoard}></CardsList>
 				)}
 
-			</body>
-			<footer>
+			</section>
+			<section>
 				<h3>
 					© 2023 Inspiration Board | Hoku, Alaere, Anika, & Mia | C18
 					Snow Leopards
 				</h3>
-			</footer>
+			</section>
+      <script src="./node_modules/axios/dist/axios.min.js"></script>
+      <script src="src/index.js"></script>
 		</div>
 	);
 }
