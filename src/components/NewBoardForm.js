@@ -1,18 +1,17 @@
-import "../styles/NewBoardForm.css";
-import { useState } from "react";
+import React, { useState } from "react";
 
 const NewBoardForm = (props) => {
   const [title, setTitle] = useState("");
   const [owner, setOwner] = useState("");
-  const handleTitleChange = (e) => {
-    setTitle(e.target.value);
+  const createTitle = (event) => {
+    setTitle(event.target.value);
   };
-  const handleOwnerChange = (e) => {
-    setOwner(e.target.value);
+  const addOwner = (event) => {
+    setOwner(event.target.value);
   };
 
-  const createNewBoard = (e) => {
-    e.preventDefault();
+  const createNewBoard = (event) => {
+    event.preventDefault();
     props.createNewBoard({ title, owner });
     setTitle("");
     setOwner("");
@@ -25,9 +24,11 @@ const NewBoardForm = (props) => {
       <input
         type="text"
         value={title}
-        onChange={handleTitleChange}
+        onChange={createTitle}
         className={
-          title.length === 0 || title.length > 40 ? "invalidInput" : ""
+          title.length === 0 || title.length > 50
+            ? "Title cannot exceed 50 characters"
+            : ""
         }
       ></input>
       <br />
@@ -37,13 +38,17 @@ const NewBoardForm = (props) => {
       <input
         type="text"
         value={owner}
-        onChange={handleOwnerChange}
+        onChange={addOwner}
         className={
-          owner.length === 0 || owner.length > 40 ? "invalidInput" : ""
+          owner.length === 0 || owner.length > 50
+            ? "Owner name(s) cannot exceed 50 characters"
+            : ""
         }
       ></input>
       <p>
-        Preview: {title} - {owner}
+        Preview:
+        {title && ` ${title}`}
+        {owner && ` - ${owner}`}
       </p>
       {/* <input
         type="Submit"

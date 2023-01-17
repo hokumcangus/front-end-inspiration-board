@@ -1,13 +1,13 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
 const NewCardForm = (props) => {
   const [message, setMessage] = useState("");
-  const handleMessageChange = (e) => {
-    setMessage(e.target.value);
+  const createNewMessage = (event) => {
+    setMessage(event.target.value);
   };
 
-  const createNewCard = (e) => {
-    e.preventDefault();
+  const createNewCard = (event) => {
+    event.preventDefault();
     props.postNewCard(message);
     setMessage("");
   };
@@ -21,13 +21,13 @@ const NewCardForm = (props) => {
         <br />
         <input
           type="text"
+          value={message}
+          onChange={createNewMessage}
           className={
-            message.length === 0 || message.length > 40
-              ? "invalid-form-input"
+            message.length === 0 || message.length > 50
+              ? "Message required. Do not exceed 50 characters."
               : ""
           }
-          onChange={handleMessageChange}
-          value={message}
         ></input>
         <p>Preview: {message}</p>
         {/* <input

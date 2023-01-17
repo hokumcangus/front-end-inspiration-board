@@ -1,9 +1,13 @@
-/* 
-.flexboxCardsList {
-    max-height: 300px;
+.cardsList {
+    text-align: left;
+}
+
+.gridCardsList {
+    display: grid;
+    grid-template: 1fr / 2fr 1fr;
     margin-left: 20px;
     margin-right: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-} */
+    max-height: 300px;
+    column-gap: 150px;
+    padding: 50px;
+}

@@ -2,7 +2,6 @@ h1 {
     font-family: "Splash";
     font-size: 6rem;
     text-align: center;
-    padding-bottom: 10px;   
 }
 
 h2 {
@@ -35,17 +34,42 @@ li {
     background-color: #ffc39d;
 }
 
-.flexbox {
-    max-height: 300px;
+.grid {
+    display: grid;
+    grid-template: 1fr / 1fr 1fr 1fr;
     margin-left: 20px;
     margin-right: 20px;
-    padding: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    max-height: 300px;
+    column-gap: 75px;
+    padding: 50px;
+}
+
+input[type=text] {
+    width: 100%;
+}
+
+.selectedBoard {
+    text-align: center;
+    font-size: 2rem;
+    padding: 50px 0;
 }
 
 .toggleNewBoardForm:hover {
     color: #fe9e44;
     text-decoration: underline;
 }
+
+/* .glow {
+    -webkit-animation: glow 5s ease-in infinite alternate;
+    -moz-animation: glow 5s ease-in infinite alternate;
+    animation: glow 5s ease-in infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fd8226, 0 0 40px #fd8226, 0 0 50px #fd8226, 0 0 60px #fd8226, 0 0 70px #fd8226;
+    }
+    to {
+        text-shadow: 0 0 20px #fff, 0 0 30px #fea042, 0 0 40px #fea042, 0 0 50px #fea042, 0 0 60px #fea042, 0 0 70px #fea042, 0 0 80px #fea042;
+    }
+} */

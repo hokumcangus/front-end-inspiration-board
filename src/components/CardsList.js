@@ -1,11 +1,16 @@
-import "../styles/CardsList.css";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useState, useEffect } from "react";
 import Card from "./Card";
 import NewCardForm from "./NewCardForm";
+import "../styles/CardsList.css";
 
 const CardsList = (props) => {
   const [cardsData, setCardsData] = useState([]);
+  // const [likesCount, setLikesCount] = useState(0);
+
+  // const plusOneLike = () => {
+  //   setLikesCount((likesCount) => likesCount + 1);
+  // }
 
   useEffect(() => {
     axios
@@ -17,7 +22,7 @@ const CardsList = (props) => {
       })
       .catch((error) => {
         console.log("Error:", error);
-        alert("Couldn't get cards for this board.");
+        alert("Unable to retrieve cards for this board");
       });
   }, [props.board]);
 
@@ -32,11 +37,11 @@ const CardsList = (props) => {
       })
       .catch((error) => {
         console.log("Error:", error);
-        alert("Couldn't delete the card.");
+        alert("Unable to delete the selected card");
       });
   };
 
-  const plusOneCardItem = (card) => {
+  const plusOneLike = (card) => {
     axios
       .put(`${process.env.REACT_APP_BACKEND_URL}/cards/${card.cardId}/like`)
       .then((response) => {
@@ -49,16 +54,17 @@ const CardsList = (props) => {
       })
       .catch((error) => {
         console.log("Error:", error);
-        alert("Couldn't +1 the card.");
+        alert("Unable to add an additional 'like'.");
       });
   };
 
+  // delete this function is using alt return below. Card component built-in to alt return
   const cardElements = cardsData.map((card) => {
     return (
       <Card
         card={card}
-        plusOneCardItem={plusOneCardItem}
-        deleteCardItem={deleteCard}
+        plusOneLike={plusOneLike}
+        deleteCard={deleteCard}
       ></Card>
     );
   });
@@ -80,14 +86,33 @@ const CardsList = (props) => {
       });
   };
 
+  // "alt return"
+  // return (
+  //     <div className="gridCardsList">
+  //       <section>
+  //         <h2 className="cardsList">Cards for {props.board.title}</h2>
+  //         {props.cardsData.map((card, cardId) => (
+  //           <Card
+  //             message={card.message}
+  //             plusOneLike={plusOneLike}
+  //             deleteCard={deleteCard}
+  //             key={cardId}
+  //             boardId={boardId}
+  //           />
+  //         ))}
+  //       </section>
+  //       <section>
+  //         <NewCardForm addNewCard={addNewCard}></NewCardForm>
+  //       </section>
+  //     </div>
+  //   );
+  // };
+
   return (
-    <section className="flexbox">
+    <section className="gridCardsList">
       <section>
         <h2 className="cardsList">Cards for {props.board.title}</h2>
         <div>{cardElements}</div>
-      </section>
-      <section>
-        <h2>Space Holder</h2>
       </section>
       <section>
         <NewCardForm addNewCard={addNewCard}></NewCardForm>
