@@ -6,33 +6,33 @@ import Board from "./components/Board";
 import "./styles/App.css";
 
 function App() {
-	// const [boardsData, setBoardsData] = useState([]);
+	// const [boardsData, setBoardsData] = useState([
+	// 	{
+	// 		boardId: 1,
+	// 		title: "Board1",
+	// 		owner: "Hoku & Anika",
+
+	// 		cards: [
+	// 			{ cardId: 1, message: "This is card 1" },
+	// 			{ cardId: 2, message: "This is card 2" },
+	// 		],
+	// 	},
+	// 	{
+	// 		boardId: 2,
+	// 		title: "Board2",
+	// 		owner: "Alaere & Mia",
+
+	// 		cards: [
+	// 			{ cardId: 3, message: "This is card 3" },
+	// 			{ cardId: 4, message: "This is card 4" },
+	// 		],
+	// 	},
+	// ]);
+
+  const [boardsData, setBoardsData] = useState([]);
 	// const [showAddCard, setAddCard] = useState([]);
-
-	const [boardsData, setBoardsData] = useState([
-		{
-			boardId: 1,
-			title: "Board1",
-			owner: "Hoku & Anika",
-
-			cards: [
-				{ cardId: 1, message: "This is card 1" },
-				{ cardId: 2, message: "This is card 2" },
-			],
-		},
-		{
-			boardId: 2,
-			title: "Board2",
-			owner: "Alaere & Mia",
-
-			cards: [
-				{ cardId: 3, message: "This is card 3" },
-				{ cardId: 4, message: "This is card 4" },
-			],
-		},
-	]);
-
-	const [selectedBoard, setSelectedBoard] = useState({
+  
+  const [selectedBoard, setSelectedBoard] = useState({
 		title: "",
 		owner: "",
 		boardId: null,
@@ -40,7 +40,7 @@ function App() {
 
 	useEffect(() => {
 		axios
-			.get(`${process.env.REACT_APP_BACKEND_URL}/boards`, {})
+			.get(`${process.env.REACT_APP_BACKEND_URL}`, {})
 			.then((response) => {
 				setBoardsData(response.data);
 			});
@@ -64,7 +64,7 @@ function App() {
 
 	const createNewBoard = (newBoard) => {
 		axios
-			.post(`${process.env.REACT_APP_BACKEND_URL}/boards`, newBoard)
+			.post(`${process.env.REACT_APP_BACKEND_URL}`, newBoard)
 			.then((response) => {
 				console.log("Response:", response.data.board);
 				const boards = [...boardsData];
@@ -130,6 +130,7 @@ function App() {
 				{selectedBoard.boardId && (
 					<CardsList board={selectedBoard}></CardsList>
 				)}
+
 			</body>
 			<footer>
 				<h3>
