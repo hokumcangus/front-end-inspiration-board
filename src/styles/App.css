@@ -2,6 +2,7 @@ h1 {
     font-family: "Splash";
     font-size: 6rem;
     text-align: center;
+    padding-top: 100px;
 }
 
 h2 {
@@ -10,8 +11,8 @@ h2 {
 
 h3 {
     text-align: center;
-    padding-top: 25px;
-    padding-bottom: 50px;
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
 
 ul {
@@ -41,7 +42,7 @@ li {
     margin-right: 20px;
     max-height: 300px;
     column-gap: 75px;
-    padding: 50px;
+    padding: 30px;
 }
 
 input[type=text] {
@@ -59,17 +60,12 @@ input[type=text] {
     text-decoration: underline;
 }
 
-/* .glow {
-    -webkit-animation: glow 5s ease-in infinite alternate;
-    -moz-animation: glow 5s ease-in infinite alternate;
-    animation: glow 5s ease-in infinite alternate;
+.mainContainer {
+    min-height: calc(100vh - 176px);
 }
 
-@keyframes glow {
-    from {
-        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fd8226, 0 0 40px #fd8226, 0 0 50px #fd8226, 0 0 60px #fd8226, 0 0 70px #fd8226;
-    }
-    to {
-        text-shadow: 0 0 20px #fff, 0 0 30px #fea042, 0 0 40px #fea042, 0 0 50px #fea042, 0 0 60px #fea042, 0 0 70px #fea042, 0 0 80px #fea042;
-    }
-} */
+footer {
+    position: relative;
+    left:0;
+    bottom:0;
+}

@@ -27,11 +27,10 @@ function App() {
 		setSelectedBoard(board);
 	};
 
-	const boardsList = boardsData.map((board, board_id) => {
+	const boardsList = boardsData.map((board, index) => {
 		return (
-			<li>
+			<li key={index}>
 				<Board
-					key={board_id}
 					board={board}
 					onSelect={selectBoard}
 				></Board>
@@ -63,15 +62,8 @@ function App() {
 	};
 
 	return (
-		<div>
+		<div className="mainContainer">
 			<section>
-				<br />
-				<br />
-				<br />
-				<br />
-				<br />
-				<br />
-				<br />
 				<h1>Inspiration Board</h1>
 			</section>
 			<section>
@@ -93,7 +85,7 @@ function App() {
 						<p>Enter details below and click Create</p>
 						{isBoardFormVisible && (
 							<NewBoardForm
-								createNewBoard={createNewBoard}
+								addNewBoard={createNewBoard}
 							></NewBoardForm>
 						)}
 						<br />
@@ -111,12 +103,12 @@ function App() {
 					<CardsList board={selectedBoard}></CardsList>
 				)}
 			</section>
-			<section>
+			<footer>
 				<h3>
 					© 2023 Inspiration Board | Hoku, Alaere, Anika, & Mia | C18
 					Snow Leopards
 				</h3>
-			</section>
+			</footer>
 			<script src="./node_modules/axios/dist/axios.min.js"></script>
 			<script src="src/index.js"></script>
 		</div>

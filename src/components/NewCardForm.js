@@ -1,14 +1,16 @@
 import React, { useState } from "react";
+import PropTypes from 'prop-types';
 
 const NewCardForm = (props) => {
   const [message, setMessage] = useState("");
+  
   const createNewMessage = (event) => {
     setMessage(event.target.value);
   };
 
-  const createNewCard = (event) => {
+  const onFormSubmit = (event) => {
     event.preventDefault();
-    props.postNewCard(message);
+    props.addNewCard(message);
     setMessage("");
   };
 
@@ -16,12 +18,12 @@ const NewCardForm = (props) => {
     <section>
       <h2>Create a New Card</h2>
       <p>Enter details below and click Create</p>
-      <form onSubmit={createNewCard} className="newCardForm">
-        <label>Message</label>
+      <form onSubmit={onFormSubmit} className="newCardForm">
+        <label htmlFor="message">Message</label>
         <br />
         <input
           type="text"
-          value={message}
+          value={props.message}
           onChange={createNewMessage}
           className={
             message.length === 0 || message.length > 50
@@ -30,17 +32,17 @@ const NewCardForm = (props) => {
           }
         ></input>
         <p>Preview: {message}</p>
-        {/* <input
-          type="Submit"
-          disabled={message.length === 0 || message.length > 40}
-          className="new-card-form__form-submit-btn"
-        ></input> */}
-        <button type="Submit" className="submitBtn">
-          Create
-        </button>
+        <input
+          type="submit"
+          value="Create"
+        ></input>
       </form>
     </section>
   );
+};
+
+NewCardForm.propTypes = {
+  addNewCard: PropTypes.func
 };
 
 export default NewCardForm;

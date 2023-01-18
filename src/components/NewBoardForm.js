@@ -1,70 +1,68 @@
 import React, { useState } from "react";
+import PropTypes from 'prop-types';
 
 const NewBoardForm = (props) => {
   const [title, setTitle] = useState("");
   const [owner, setOwner] = useState("");
+  
   const addTitle = (event) => {
     setTitle(event.target.value);
   };
+  
   const addOwner = (event) => {
     setOwner(event.target.value);
   };
 
-  const addNewBoard = (event) => {
+  const onFormSubmit = (event) => {
     event.preventDefault();
-    props.createNewBoard({ title, owner });
+    props.addNewBoard({ title, owner });
     setTitle("");
     setOwner("");
   };
 
   return (
-    <form onSubmit={addNewBoard} className="newBoardForm">
-      <label>Title</label>
+    <form onSubmit={onFormSubmit} className="newBoardForm">
+      <label htmlFor="title">Title</label>
       <br />
       <input
         type="text"
-        value={title}
+        value={props.title}
         onChange={addTitle}
-        // className={
-        //   title.length === 0 || title.length > 50
-        //     ? "Title cannot exceed 50 characters"
-        //     : ""
-        // }
+        className={
+          title.length === 0 || title.length > 50
+            ? "Title cannot exceed 50 characters"
+            : ""
+        }
       ></input>
       <br />
       <br />
-      <label>Owned By</label>
+      <label htmlFor="owner">Owned By</label>
       <br />
       <input
         type="text"
-        value={owner}
+        value={props.owner}
         onChange={addOwner}
-        // className={
-        //   owner.length === 0 || owner.length > 50
-        //     ? "Owner name(s) cannot exceed 50 characters"
-        //     : ""
-        // }
+        className={
+          owner.length === 0 || owner.length > 50
+            ? "Owner name(s) cannot exceed 50 characters"
+            : ""
+        }
       ></input>
       <p>
         Preview:
         {title && ` ${title}`}
         {owner && ` - ${owner}`}
       </p>
-      {/* <input
-        type="Submit"
-        disabled={
-          title.length === 0 ||
-          owner.length === 0 ||
-          title.length > 40 ||
-          owner.length > 40
-        }
-        className="new-board-form__form-submit-btn"
-      ></input> */}
-      <button type="Submit" className="submitBtn">
-        Create
-      </button>
+        <input
+          type="submit"
+          value="Create"
+        ></input>
     </form>
   );
+};
+
+NewBoardForm.propTypes = {
+  addNewBoard: PropTypes.func
 };
 
 export default NewBoardForm;
