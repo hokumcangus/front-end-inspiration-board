@@ -6,37 +6,14 @@ import Board from "./components/Board";
 import "./styles/App.css";
 
 function App() {
-	// const [boardsData, setBoardsData] = useState([
-	// 	{
-	// 		boardId: 1,
-	// 		title: "Board1",
-	// 		owner: "Hoku & Anika",
-
-	// 		cards: [
-	// 			{ cardId: 1, message: "This is card 1" },
-	// 			{ cardId: 2, message: "This is card 2" },
-	// 		],
-	// 	},
-	// 	{
-	// 		boardId: 2,
-	// 		title: "Board2",
-	// 		owner: "Alaere & Mia",
-
-	// 		cards: [
-	// 			{ cardId: 3, message: "This is card 3" },
-	// 			{ cardId: 4, message: "This is card 4" },
-	// 		],
-	// 	},
-	// ]);
-
   const [boardsData, setBoardsData] = useState([]);
 	// const [showAddCard, setAddCard] = useState([]);
   
-  const [selectedBoard, setSelectedBoard] = useState({
-		title: "",
-		owner: "",
-		boardId: null,
-	});
+  const [selectedBoard, setSelectedBoard] = useState({});
+		// title: "",
+		// owner: "",
+		// boardId: null,
+	
 
 	useEffect(() => {
 		axios.get('https://inpiration-board-haam.herokuapp.com/boards', {})
@@ -49,7 +26,7 @@ function App() {
 		setSelectedBoard(board);
 	};
 
-	const boardsElements = boardsData.map((board, boardId) => {
+	const boardsList = boardsData.map((board, boardId) => {
 		return (
 			<li>
 				<Board
@@ -97,7 +74,7 @@ function App() {
 					<section>
 						<h2>List of Boards</h2>
 						<p>Select a board from the list below</p>
-						<ul className="listOfBoards">{boardsElements}</ul>
+						<ul className="listOfBoards">{boardsList}</ul>
 					</section>
 					<section>
 						<h2>Now Viewing:</h2>

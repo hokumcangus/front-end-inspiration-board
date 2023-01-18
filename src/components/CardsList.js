@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Card from "./Card";
+// import Board from "./Board";
 import NewCardForm from "./NewCardForm";
 import "../styles/CardsList.css";
 
@@ -13,8 +14,7 @@ const CardsList = (props) => {
   // }
 
   useEffect(() => {
-    axios
-      .get(
+    axios.get(
         `https://inpiration-board-haam.herokuapp.com/boards/${props.board.boardId}/cards`
       )
       .then((response) => {
