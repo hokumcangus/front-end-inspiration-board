@@ -6,10 +6,7 @@ import Board from "./components/Board";
 import "./styles/App.css";
 
 function App() {
-	const [boardsData, setBoardsData] = useState([]);
-	// const [showAddCard, setAddCard] = useState([]);
-
-	// const [boardsData, setBoardsData] = useState([
+	const [boardsData, setBoardsData] = useState([
 	// 	{
 	// 		boardId: 1,
 	// 		title: "Board1",
@@ -31,9 +28,11 @@ function App() {
 	// 		],
 	// 	},
 	// ]);
-  // const URL = "https://inpiration-board-haam.herokuapp.com"
 
-	const [selectedBoard, setSelectedBoard] = useState({
+  const [boardsData, setBoardsData] = useState([]);
+	// const [showAddCard, setAddCard] = useState([]);
+  
+  const [selectedBoard, setSelectedBoard] = useState({
 		title: "",
 		owner: "",
 		boardId: null,
@@ -76,7 +75,7 @@ function App() {
 		return (
 			<li>
 				<Board
-					// key={boardId}
+					key={boardId}
 					board={board}
 					onSelect={selectBoard}
 				></Board>
@@ -110,7 +109,7 @@ function App() {
 
 	return (
 		<div>
-			<header>
+			<section>
 				<br />
 				<br />
 				<br />
@@ -119,8 +118,8 @@ function App() {
 				<br />
 				<br />
 				<h1>Inspiration Board</h1>
-			</header>
-			<body>
+			</section>
+			<section>
 				<section className="grid">
 					<section>
 						<h2>List of Boards</h2>
@@ -156,13 +155,15 @@ function App() {
 				{selectedBoard.boardId && (
 					<CardsList board={selectedBoard}></CardsList>
 				)}
-			</body>
-			<footer>
+			</section>
+			<section>
 				<h3>
 					© 2023 Inspiration Board | Hoku, Alaere, Anika, & Mia | C18
 					Snow Leopards
 				</h3>
-			</footer>
+			</section>
+      <script src="./node_modules/axios/dist/axios.min.js"></script>
+      <script src="src/index.js"></script>
 		</div>
 	);
 }

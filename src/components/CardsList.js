@@ -85,21 +85,16 @@ const CardsList = (props) => {
       });
   };
 
-  const plusOneLike = (card_id) => {
+  const plusOneLike = (card) => {
     axios
-      .patch(`${URL}/${props.board.board_id}/cards/${card_id}/like`)
-      .then(() => {
-        const newCardData = [];
-
-        for (const card of cardsData) {
-          const likedCard = {...card};
-
-          if (likedCard.card_id === card_id) {
-            likedCard.likes_count += 1;
-          }
-          newCardData.push(likedCard);
-        }
-        setCardsData(newCardData);
+      .put(`${URL}/${props.board.boardId}/cards/${card.cardId}/like`)
+      .then((response) => {
+        const newCardsData = cardsData.map((existingCard) => {
+          return existingCard.cardId !== card.cardId
+            ? existingCard
+            : { ...card, likesCount: card.likesCount + 1 };
+        });
+        setCardsData(newCardsData);
       })
       // .then((response) => {
       //   const newCardsData = cardsData.map((existingCard) => {
@@ -130,12 +125,8 @@ const CardsList = (props) => {
   const addNewCard = (cardData) => {
     axios
       .post(
-        `${URL}/${props.board.board_id}/cards`,
-        // { message }
-        {
-          board_id: props.board.board_id,
-          message: cardData,
-        }
+        `${process.env.REACT_APP_BACKEND_URL}/boards/${props.board.boardId}/cards`,
+        { cardData }
       )
       .then((response) => {
         // const cards = [...cardsData];
