@@ -3,14 +3,13 @@ import PropTypes from "prop-types";
 
 const Board = (props) => {
   return (
-    <div onClick={() => props.onSelect(props.board)}>{props.board.title}</div>
+    <div onClick={(event) => props.onSelect(props.board)}>{props.board.title}</div>
   );
 };
 
-// Board.propTypes = {
-//   boardId: PropTypes.number,
-//   title: PropTypes.string.isRequired,
-//   owner: PropTypes.string.isRequired
-// }
+Board.propTypes = {
+  title: PropTypes.string,
+  owner: PropTypes.string
+}
 
 export default Board;

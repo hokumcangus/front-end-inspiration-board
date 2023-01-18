@@ -6,76 +6,31 @@ import Board from "./components/Board";
 import "./styles/App.css";
 
 function App() {
-	const [boardsData, setBoardsData] = useState([
-	// 	{
-	// 		boardId: 1,
-	// 		title: "Board1",
-	// 		owner: "Hoku & Anika",
-
-	// 		cards: [
-	// 			{ cardId: 1, message: "This is card 1" },
-	// 			{ cardId: 2, message: "This is card 2" },
-	// 		],
-	// 	},
-	// 	{
-	// 		boardId: 2,
-	// 		title: "Board2",
-	// 		owner: "Alaere & Mia",
-
-	// 		cards: [
-	// 			{ cardId: 3, message: "This is card 3" },
-	// 			{ cardId: 4, message: "This is card 4" },
-	// 		],
-	// 	},
-	// ]);
-
-  const [boardsData, setBoardsData] = useState([]);
+	const [boardsData, setBoardsData] = useState([]);
 	// const [showAddCard, setAddCard] = useState([]);
-  
-  const [selectedBoard, setSelectedBoard] = useState({
+
+	const [selectedBoard, setSelectedBoard] = useState({
 		title: "",
 		owner: "",
-		boardId: null,
+		board_id: null,
 	});
 
-	// useEffect(() => {
-	// 	axios
-	// 		.get(`${URL}/boards`, {})
-	// 		.then((response) => {
-	// 			setBoardsData(response.data);
-	// 		});
-	// }, []);
-
-  const getAllBoards = () => {
-    axios
-    .get(URL)
-    .then((response) => {
-      const newBoards = response.data.map((board) => {
-        return {
-          key: board.board_id,
-          board_id: board.board_id,
-          title: board.title,
-          owner: board.owner,
-      };
-    });
-    setBoardsData(newBoards);
-  })
-  .catch((error) => {
-    console.log(Error);
-  });
-};
-
-  useEffect(getAllBoards, []);
+	useEffect(() => {
+		axios
+			.get("https://inpiration-board-haam.herokuapp.com/boards", {})
+			.then((response) => {
+				setBoardsData(response.data);
+			});
+	}, []);
 
 	const selectBoard = (board) => {
 		setSelectedBoard(board);
 	};
 
-	const boardsElements = boardsData.map((board) => {
+	const boardsList = boardsData.map((board, index) => {
 		return (
-			<li>
+			<li key={index}>
 				<Board
-					key={boardId}
 					board={board}
 					onSelect={selectBoard}
 				></Board>
@@ -108,15 +63,8 @@ function App() {
 	};
 
 	return (
-		<div>
+		<div className="mainContainer">
 			<section>
-				<br />
-				<br />
-				<br />
-				<br />
-				<br />
-				<br />
-				<br />
 				<h1>Inspiration Board</h1>
 			</section>
 			<section>
@@ -124,12 +72,12 @@ function App() {
 					<section>
 						<h2>List of Boards</h2>
 						<p>Select a board from the list below</p>
-						<ul className="listOfBoards">{boardsElements}</ul>
+						<ul className="listOfBoards">{boardsList}</ul>
 					</section>
 					<section>
 						<h2>Now Viewing:</h2>
 						<p className="selectedBoard">
-							{selectedBoard.boardId &&
+							{selectedBoard.board_id &&
 								`${selectedBoard.title} by ${selectedBoard.owner}`}
 						</p>
 					</section>
@@ -138,7 +86,7 @@ function App() {
 						<p>Enter details below and click Create</p>
 						{isBoardFormVisible && (
 							<NewBoardForm
-								createNewBoard={createNewBoard}
+								addNewBoard={createNewBoard}
 							></NewBoardForm>
 						)}
 						<br />
@@ -152,18 +100,18 @@ function App() {
 						</span>
 					</section>
 				</section>
-				{selectedBoard.boardId && (
+				{selectedBoard.board_id && (
 					<CardsList board={selectedBoard}></CardsList>
 				)}
 			</section>
-			<section>
+			<footer>
 				<h3>
 					© 2023 Inspiration Board | Hoku, Alaere, Anika, & Mia | C18
 					Snow Leopards
 				</h3>
-			</section>
-      <script src="./node_modules/axios/dist/axios.min.js"></script>
-      <script src="src/index.js"></script>
+			</footer>
+			<script src="./node_modules/axios/dist/axios.min.js"></script>
+			<script src="src/index.js"></script>
 		</div>
 	);
 }
