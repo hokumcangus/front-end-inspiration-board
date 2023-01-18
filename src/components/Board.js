@@ -9,8 +9,8 @@ const Board = (props) => {
 
 Board.propTypes = {
   boardId: PropTypes.number,
-  title: PropTypes.string.isRequired,
-  owner: PropTypes.string.isRequired
+  title: PropTypes.string,
+  owner: PropTypes.string
 }
 
 export default Board;
