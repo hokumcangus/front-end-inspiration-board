@@ -9,10 +9,11 @@ function App() {
   const [boardsData, setBoardsData] = useState([]);
 	// const [showAddCard, setAddCard] = useState([]);
   
-  const [selectedBoard, setSelectedBoard] = useState({});
-		// title: "",
-		// owner: "",
-		// boardId: null,
+  const [selectedBoard, setSelectedBoard] = useState({
+		title: "",
+		owner: "",
+		boardId: null
+  });
 	
 
 	useEffect(() => {
@@ -26,11 +27,11 @@ function App() {
 		setSelectedBoard(board);
 	};
 
-	const boardsList = boardsData.map((board, boardId) => {
+	const boardsList = boardsData.map((board, board_id) => {
 		return (
 			<li>
 				<Board
-					key={boardId}
+					key={board_id}
 					board={board}
 					onSelect={selectBoard}
 				></Board>
@@ -79,7 +80,7 @@ function App() {
 					<section>
 						<h2>Now Viewing:</h2>
 						<p className="selectedBoard">
-							{selectedBoard.boardId &&
+							{selectedBoard.board_id &&
 								`${selectedBoard.title} by ${selectedBoard.owner}`}
 						</p>
 					</section>
@@ -102,7 +103,7 @@ function App() {
 						</span>
 					</section>
 				</section>
-				{selectedBoard.boardId && (
+				{selectedBoard.board_id && (
 					<CardsList board={selectedBoard}></CardsList>
 				)}
 			</section>
