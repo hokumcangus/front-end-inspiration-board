@@ -15,7 +15,7 @@ const CardsList = (props) => {
 
   useEffect(() => {
     axios.get(
-        `https://inpiration-board-haam.herokuapp.com/boards/${props.board.boardId}/cards`
+        `https://inpiration-board-haam.herokuapp.com/boards/${props.board.board_id}/cards`
       )
       .then((response) => {
         setCardsData(response.data);
@@ -28,10 +28,10 @@ const CardsList = (props) => {
 
   const deleteCard = (card) => {
     axios
-      .delete(`https://inpiration-board-haam.herokuapp.com/boards/${props.board.boardId}/cards/${card.cardId}`)
+      .delete(`https://inpiration-board-haam.herokuapp.com/boards/${props.board.board_id}/cards/${card.card_id}`)
       .then((response) => {
         const newCardsData = cardsData.filter((existingCard) => {
-          return existingCard.cardId !== card.cardId;
+          return existingCard.card_id !== card.card_id;
         });
         setCardsData(newCardsData);
       })
@@ -43,10 +43,10 @@ const CardsList = (props) => {
 
   const plusOneLike = (card) => {
     axios
-      .put(`https://inpiration-board-haam.herokuapp.com/boards/${props.board.boardId}/cards/${card.cardId}/like`)
+      .put(`https://inpiration-board-haam.herokuapp.com/boards/${props.board.board_id}/cards/${card.card_id}/like`)
       .then((response) => {
         const newCardsData = cardsData.map((existingCard) => {
-          return existingCard.cardId !== card.cardId
+          return existingCard.card_id !== card.card_id
             ? existingCard
             : { ...card, likesCount: card.likesCount + 1 };
         });
