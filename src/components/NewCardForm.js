@@ -30,11 +30,11 @@ const NewCardForm = (props) => {
           }
         ></input>
         <p>Preview: {message}</p>
-        {/* <input
+        <input
           type="Submit"
           disabled={message.length === 0 || message.length > 40}
           className="new-card-form__form-submit-btn"
-        ></input> */}
+        ></input>
         <button type="Submit" className="submitBtn">
           Create
         </button>

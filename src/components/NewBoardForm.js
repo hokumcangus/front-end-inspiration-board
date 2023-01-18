@@ -3,7 +3,7 @@ import React, { useState } from "react";
 const NewBoardForm = (props) => {
   const [title, setTitle] = useState("");
   const [owner, setOwner] = useState("");
-  const createTitle = (event) => {
+  const addTitle = (event) => {
     setTitle(event.target.value);
   };
   const addOwner = (event) => {
@@ -24,7 +24,7 @@ const NewBoardForm = (props) => {
       <input
         type="text"
         value={title}
-        onChange={createTitle}
+        onChange={addTitle}
         className={
           title.length === 0 || title.length > 50
             ? "Title cannot exceed 50 characters"
@@ -50,7 +50,7 @@ const NewBoardForm = (props) => {
         {title && ` ${title}`}
         {owner && ` - ${owner}`}
       </p>
-      {/* <input
+      <input
         type="Submit"
         disabled={
           title.length === 0 ||
@@ -59,7 +59,7 @@ const NewBoardForm = (props) => {
           owner.length > 40
         }
         className="new-board-form__form-submit-btn"
-      ></input> */}
+      ></input>
       <button type="Submit" className="submitBtn">
         Create
       </button>

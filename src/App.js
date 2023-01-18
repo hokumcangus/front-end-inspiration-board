@@ -1,36 +1,37 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axios, { AxiosHeaders } from "axios";
 import CardsList from "./components/CardsList";
 import NewBoardForm from "./components/NewBoardForm";
 import Board from "./components/Board";
 import "./styles/App.css";
 
 function App() {
-	// const [boardsData, setBoardsData] = useState([]);
+	const [boardsData, setBoardsData] = useState([]);
 	// const [showAddCard, setAddCard] = useState([]);
 
-	const [boardsData, setBoardsData] = useState([
-		{
-			boardId: 1,
-			title: "Board1",
-			owner: "Hoku & Anika",
+	// const [boardsData, setBoardsData] = useState([
+	// 	{
+	// 		boardId: 1,
+	// 		title: "Board1",
+	// 		owner: "Hoku & Anika",
 
-			cards: [
-				{ cardId: 1, message: "This is card 1" },
-				{ cardId: 2, message: "This is card 2" },
-			],
-		},
-		{
-			boardId: 2,
-			title: "Board2",
-			owner: "Alaere & Mia",
+	// 		cards: [
+	// 			{ cardId: 1, message: "This is card 1" },
+	// 			{ cardId: 2, message: "This is card 2" },
+	// 		],
+	// 	},
+	// 	{
+	// 		boardId: 2,
+	// 		title: "Board2",
+	// 		owner: "Alaere & Mia",
 
-			cards: [
-				{ cardId: 3, message: "This is card 3" },
-				{ cardId: 4, message: "This is card 4" },
-			],
-		},
-	]);
+	// 		cards: [
+	// 			{ cardId: 3, message: "This is card 3" },
+	// 			{ cardId: 4, message: "This is card 4" },
+	// 		],
+	// 	},
+	// ]);
+  // const URL = "https://inpiration-board-haam.herokuapp.com"
 
 	const [selectedBoard, setSelectedBoard] = useState({
 		title: "",
@@ -38,19 +39,40 @@ function App() {
 		boardId: null,
 	});
 
-	useEffect(() => {
-		axios
-			.get(`${process.env.REACT_APP_BACKEND_URL}/boards`, {})
-			.then((response) => {
-				setBoardsData(response.data);
-			});
-	}, []);
+	// useEffect(() => {
+	// 	axios
+	// 		.get(`${URL}/boards`, {})
+	// 		.then((response) => {
+	// 			setBoardsData(response.data);
+	// 		});
+	// }, []);
+
+  const getAllBoards = () => {
+    axios
+    .get(URL)
+    .then((response) => {
+      const newBoards = response.data.map((board) => {
+        return {
+          key: board.board_id,
+          board_id: board.board_id,
+          title: board.title,
+          owner: board.owner,
+      };
+    });
+    setBoardsData(newBoards);
+  })
+  .catch((error) => {
+    console.log(Error);
+  });
+};
+
+  useEffect(getAllBoards, []);
 
 	const selectBoard = (board) => {
 		setSelectedBoard(board);
 	};
 
-	const boardsElements = boardsData.map((board, boardId) => {
+	const boardsElements = boardsData.map((board) => {
 		return (
 			<li>
 				<Board
@@ -64,12 +86,16 @@ function App() {
 
 	const createNewBoard = (newBoard) => {
 		axios
-			.post(`${process.env.REACT_APP_BACKEND_URL}/boards`, newBoard)
+			.post(`${URL}/boards`, newBoard)
 			.then((response) => {
-				console.log("Response:", response.data.board);
-				const boards = [...boardsData];
-				boards.push(response.data.board);
-				setBoardsData(boards);
+				// console.log("Response:", response.data.board);
+				// const boards = [...boardsData];
+				// boards.push(response.data.board);
+				// setBoardsData(boards);
+        if (newBoard.title && newBoard.owner) {
+          console.log(response);
+          getAllBoards();
+        }
 			})
 			.catch((error) => {
 				console.log("Error:", error);

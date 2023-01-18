@@ -7,10 +7,10 @@ const Board = (props) => {
   );
 };
 
-Board.propTypes = {
-  boardId: PropTypes.number,
-  title: PropTypes.string.isRequired,
-  owner: PropTypes.string.isRequired
-}
+// Board.propTypes = {
+//   boardId: PropTypes.number,
+//   title: PropTypes.string.isRequired,
+//   owner: PropTypes.string.isRequired
+// }
 
 export default Board;
