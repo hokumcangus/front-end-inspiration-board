@@ -15,7 +15,7 @@ const CardsList = (props) => {
   useEffect(() => {
     axios
       .get(
-        `${process.env.REACT_APP_BACKEND_URL}boards/${props.board.boardId}/cards`
+        `https://inpiration-board-haam.herokuapp.com/boards/${props.board.boardId}/cards`
       )
       .then((response) => {
         setCardsData(response.data);
@@ -28,7 +28,7 @@ const CardsList = (props) => {
 
   const deleteCard = (card) => {
     axios
-      .delete(`${process.env.REACT_APP_BACKEND_URL}boards/${props.board.boardId}/cards/${card.cardId}`)
+      .delete(`https://inpiration-board-haam.herokuapp.com/boards/${props.board.boardId}/cards/${card.cardId}`)
       .then((response) => {
         const newCardsData = cardsData.filter((existingCard) => {
           return existingCard.cardId !== card.cardId;
@@ -43,7 +43,7 @@ const CardsList = (props) => {
 
   const plusOneLike = (card) => {
     axios
-      .put(`${process.env.REACT_APP_BACKEND_URL}boards/${props.board.boardId}/cards/${card.cardId}/like`)
+      .put(`https://inpiration-board-haam.herokuapp.com/boards/${props.board.boardId}/cards/${card.cardId}/like`)
       .then((response) => {
         const newCardsData = cardsData.map((existingCard) => {
           return existingCard.cardId !== card.cardId
@@ -72,7 +72,7 @@ const CardsList = (props) => {
   const addNewCard = (message) => {
     axios
       .post(
-        `${process.env.REACT_APP_BACKEND_URL}boards/${props.board.boardId}/cards`,
+        `https://inpiration-board-haam.herokuapp.com/boards/${props.board.boardId}/cards`,
         { message }
       )
       .then((response) => {

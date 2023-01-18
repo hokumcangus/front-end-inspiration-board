@@ -39,8 +39,7 @@ function App() {
 	});
 
 	useEffect(() => {
-		axios
-			.get(`${process.env.REACT_APP_BACKEND_URL}/boards`, {})
+		axios.get('https://inpiration-board-haam.herokuapp.com/boards', {})
 			.then((response) => {
 				setBoardsData(response.data);
 			});
@@ -54,7 +53,7 @@ function App() {
 		return (
 			<li>
 				<Board
-					// key={boardId}
+					key={boardId}
 					board={board}
 					onSelect={selectBoard}
 				></Board>
@@ -63,8 +62,7 @@ function App() {
 	});
 
 	const createNewBoard = (newBoard) => {
-		axios
-			.post(`${process.env.REACT_APP_BACKEND_URL}/boards`, newBoard)
+		axios.post('https://inpiration-board-haam.herokuapp.com/boards', newBoard)
 			.then((response) => {
 				console.log("Response:", response.data.board);
 				const boards = [...boardsData];
@@ -130,7 +128,6 @@ function App() {
 				{selectedBoard.boardId && (
 					<CardsList board={selectedBoard}></CardsList>
 				)}
-
 			</section>
 			<section>
 				<h3>
