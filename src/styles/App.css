@@ -69,3 +69,11 @@ footer {
     left:0;
     bottom:0;
 }
+
+/* .buttonWrapper {
+    flex-wrap: wrap;
+    display: flex;
+    flex-direction: row;
+    height: 30px;
+    justify-content: space-between ;
+} */

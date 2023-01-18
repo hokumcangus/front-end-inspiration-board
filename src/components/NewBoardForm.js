@@ -20,6 +20,11 @@ const NewBoardForm = (props) => {
     setOwner("");
   };
 
+  // const resetForm = (event) => {
+  //   setTitle("");
+  //   setOwner("");
+  //   };
+
   return (
     <form onSubmit={onFormSubmit} className="newBoardForm">
       <label htmlFor="title">Title</label>
@@ -53,10 +58,19 @@ const NewBoardForm = (props) => {
         {title && ` ${title}`}
         {owner && ` - ${owner}`}
       </p>
+      <section className="buttonWrapper">  
         <input
           type="submit"
           value="Create"
         ></input>
+        <br />
+        <br />
+        {/* <input
+          type="reset"
+          value="Reset"
+          onClick={resetForm}
+        ></input> */}
+        </section>
     </form>
   );
 };
