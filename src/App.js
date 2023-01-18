@@ -6,18 +6,18 @@ import Board from "./components/Board";
 import "./styles/App.css";
 
 function App() {
-  const [boardsData, setBoardsData] = useState([]);
+	const [boardsData, setBoardsData] = useState([]);
 	// const [showAddCard, setAddCard] = useState([]);
-  
-  const [selectedBoard, setSelectedBoard] = useState({
+
+	const [selectedBoard, setSelectedBoard] = useState({
 		title: "",
 		owner: "",
-		boardId: null
-  });
-	
+		board_id: null,
+	});
 
 	useEffect(() => {
-		axios.get('https://inpiration-board-haam.herokuapp.com/boards', {})
+		axios
+			.get("https://inpiration-board-haam.herokuapp.com/boards", {})
 			.then((response) => {
 				setBoardsData(response.data);
 			});
@@ -40,7 +40,11 @@ function App() {
 	});
 
 	const createNewBoard = (newBoard) => {
-		axios.post('https://inpiration-board-haam.herokuapp.com/boards', newBoard)
+		axios
+			.post(
+				"https://inpiration-board-haam.herokuapp.com/boards",
+				newBoard
+			)
 			.then((response) => {
 				console.log("Response:", response.data.board);
 				const boards = [...boardsData];
@@ -113,8 +117,8 @@ function App() {
 					Snow Leopards
 				</h3>
 			</section>
-      <script src="./node_modules/axios/dist/axios.min.js"></script>
-      <script src="src/index.js"></script>
+			<script src="./node_modules/axios/dist/axios.min.js"></script>
+			<script src="src/index.js"></script>
 		</div>
 	);
 }

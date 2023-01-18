@@ -7,6 +7,8 @@ const Board = (props) => {
   );
 };
 
+
+
 Board.propTypes = {
   title: PropTypes.string,
   owner: PropTypes.string

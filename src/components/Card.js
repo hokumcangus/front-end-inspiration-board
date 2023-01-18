@@ -1,29 +1,24 @@
 import React from "react";
 import PropTypes from "prop-types";
+import "../styles/Card.css";
 
 const Card = (props) => {
-  return (
-    <div>
-      <section>
-        <p>{props.message}</p>
-        <ul>
-          <li>
-            <p>{props.likesCount} ❤️</p>
-          </li>
-          <li>
-            <button onClick={(event) => props.plusOneLike(props.id)}>
-              +❤️
-            </button>
-          </li>
-        </ul>
-        <section>
-          <button onClick={(event) => props.deleteCard(props.id)}>
-            Delete Card
-          </button>
-        </section>
-      </section>
-    </div>
-  );
+	return (
+		<div>
+			<section>
+				<p className="message">{props.message}</p>
+				<div className="tinyFlexWrapper">
+						<span>{props.likesCount} 🧡</span>
+						<button onClick={(event) => props.plusOneLike(props)}>
+							+🧡
+						</button>
+						<button onClick={(event) => props.deleteCard(props)}>
+							Delete Card
+						</button>
+				</div>
+			</section>
+		</div>
+	);
 };
 
 // const Card = (props) => {
@@ -41,8 +36,8 @@ const Card = (props) => {
 // };
 
 Card.propTypes = {
-  message: PropTypes.string,
-  likesCount: PropTypes.number
+	message: PropTypes.string,
+	likesCount: PropTypes.number,
 };
 
 export default Card;
