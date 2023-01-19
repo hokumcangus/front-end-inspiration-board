@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import PropTypes from 'prop-types';
+import "../styles/App.css";
 
 const NewBoardForm = (props) => {
+  // console.log("new board form props", props)
   const [title, setTitle] = useState("");
   const [owner, setOwner] = useState("");
   
@@ -20,10 +22,10 @@ const NewBoardForm = (props) => {
     setOwner("");
   };
 
-  // const resetForm = (event) => {
-  //   setTitle("");
-  //   setOwner("");
-  //   };
+  const resetForm = (event) => {
+    setTitle("");
+    setOwner("");
+    };
 
   return (
     <form onSubmit={onFormSubmit} className="newBoardForm">
@@ -31,13 +33,10 @@ const NewBoardForm = (props) => {
       <br />
       <input
         type="text"
+        minLength={1}
+        maxLength={40}
         value={props.title}
         onChange={addTitle}
-        className={
-          title.length === 0 || title.length > 50
-            ? "Title cannot exceed 50 characters"
-            : ""
-        }
       ></input>
       <br />
       <br />
@@ -45,32 +44,29 @@ const NewBoardForm = (props) => {
       <br />
       <input
         type="text"
+        minLength={1}
+        maxLength={40}
         value={props.owner}
         onChange={addOwner}
-        className={
-          owner.length === 0 || owner.length > 50
-            ? "Owner name(s) cannot exceed 50 characters"
-            : ""
-        }
       ></input>
       <p>
         Preview:
         {title && ` ${title}`}
         {owner && ` - ${owner}`}
       </p>
-      <section className="buttonWrapper">  
+      <section className="buttonGrid">  
         <input
           type="submit"
           value="Create"
+          className="button"
         ></input>
-        <br />
-        <br />
-        {/* <input
+        <input
           type="reset"
           value="Reset"
+          className="button"
           onClick={resetForm}
-        ></input> */}
-        </section>
+        ></input>
+      </section>
     </form>
   );
 };
