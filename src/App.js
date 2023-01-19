@@ -91,10 +91,10 @@ function App() {
   const deleteAllBoards = (boards) => {
     axios
     .delete(
-      `https://inpiration-board-haam.herokuapp.com/${boards}`
-    )
+      `https://inpiration-board-haam.herokuapp.com/boards`
+      )
     .then((response) => {;
-      setBoardsData(response.data.boards)
+      setBoardsData([])
       resetSelectBoard();
     })
     .catch((error) => {
@@ -113,7 +113,7 @@ function App() {
 					<section>
 						<h2 className="noBottomMargin">List of Boards</h2>
             <div className="deleteBoards"
-              onClick={(event) => deleteAllBoards(boardsList)}>
+              onClick={(event) => deleteAllBoards(boardsData)}>
                 Delete All Boards
             </div>
 						<p>Select a board to view from the list below</p>
