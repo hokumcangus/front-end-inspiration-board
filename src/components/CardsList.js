@@ -70,7 +70,7 @@ const CardsList = (props) => {
 	//Displays each card with like and delete button
 	const cardsList = cardsData.map((card, index) => {
     return (
-      <div  className="cardListFlex" key={index}>
+      <div key={index}>
         <Card
           card={card}
 					plusOneLike={plusOneLike}
