@@ -7,7 +7,6 @@ import "./styles/App.css";
 
 function App() {
 	const [boardsData, setBoardsData] = useState([]);
-	// const [showAddCard, setAddCard] = useState([]);
 
 	const [selectedBoard, setSelectedBoard] = useState({
 		title: "",
@@ -19,7 +18,7 @@ function App() {
 		axios
 			.get("https://inpiration-board-haam.herokuapp.com/boards", {})
 			.then((response) => {
-				setBoardsData(response.data);
+        setBoardsData(response.data);
 			});
 	}, []);
 
@@ -41,15 +40,16 @@ function App() {
 	const createNewBoard = (newBoard) => {
 		axios
 			.post(`${URL}/boards`, newBoard)
+    console.log("new board", newBoard)
+    axios
+			.post(
+				"https://inpiration-board-haam.herokuapp.com/boards", newBoard
+        )
 			.then((response) => {
-				// console.log("Response:", response.data.board);
-				// const boards = [...boardsData];
-				// boards.push(response.data.board);
-				// setBoardsData(boards);
-        if (newBoard.title && newBoard.owner) {
-          console.log(response);
-          getAllBoards();
-        }
+				console.log("Response:", response.data.boards);
+				const boards = [...boardsData];
+				boards.push(response.data.boards);
+				setBoardsData(boards);
 			})
 			.catch((error) => {
 				console.log("Error:", error);
@@ -57,10 +57,44 @@ function App() {
 			});
 	};
 
-	const [isBoardFormVisible, setIsBoardFormVisible] = useState(true);
+	const [isBoardFormShowing, setIsBoardFormShowing] = useState(true);
 	const toggleNewBoardForm = () => {
-		setIsBoardFormVisible(!isBoardFormVisible);
-	};
+		setIsBoardFormShowing(!isBoardFormShowing);
+	};  
+
+
+  const deleteOneBoard = (board_id) => {
+    axios
+      .delete(
+        `https://inpiration-board-haam.herokuapp.com/boards/${board_id}`
+      )
+      .then((response) => {
+        const newBoardsData = boardsData.filter((deletedBoard) => {
+          return deletedBoard.board_id !== board_id;
+        });
+        setBoardsData(newBoardsData);
+      })
+      .catch((error) => {
+        console.log("Error:", error);
+        alert("Unable to delete this board");
+    });
+  };
+
+
+  const deleteAllBoards = (boards) => {
+    console.log("this is boards data", boardsData)
+    axios
+    .delete(
+      `https://inpiration-board-haam.herokuapp.com/${boardsData}`
+    )
+    .then((response) => {;
+      setBoardsData(response.data.boards);
+    })
+    .catch((error) => {
+      console.log("Error:", error);
+      alert("Unable to delete all boards");
+    });
+  };
 
 	return (
 		<div className="mainContainer">
@@ -68,36 +102,46 @@ function App() {
 				<h1>Inspiration Board</h1>
 			</section>
 			<section>
-				<section className="grid">
+				<section className="upperGrid">
 					<section>
-						<h2>List of Boards</h2>
-						<p>Select a board from the list below</p>
+						<h2 className="noBottomMargin">List of Boards</h2>
+            <div className="deleteBoards"
+              onClick={deleteAllBoards}>
+                Delete All Boards
+            </div>
+						<p>Select a board to view from the list below</p>
 						<ul className="listOfBoards">{boardsList}</ul>
 					</section>
 					<section>
-						<h2>Now Viewing:</h2>
+						<h2 className="noBottomMargin">Now Viewing:</h2>
+            <div className="deleteBoards"
+              onClick={deleteOneBoard}>
+              {selectedBoard.board_id 
+                  ? "Delete This Board"
+                  : ""}
+            </div>
 						<p className="selectedBoard">
 							{selectedBoard.board_id &&
 								`${selectedBoard.title} by ${selectedBoard.owner}`}
-						</p>
+            </p>
 					</section>
 					<section>
 						<h2>Need a New Board?</h2>
 						<p>Enter details below and click Create</p>
-						{isBoardFormVisible && (
+						{isBoardFormShowing && (
 							<NewBoardForm
 								addNewBoard={createNewBoard}
 							></NewBoardForm>
 						)}
 						<br />
-						<span
+						<div
 							onClick={toggleNewBoardForm}
 							className="toggleNewBoardForm"
 						>
-							{isBoardFormVisible
+							{isBoardFormShowing
 								? "Hide New Board Form"
 								: "Show New Board Form"}
-						</span>
+						</div>
 					</section>
 				</section>
 				{selectedBoard.board_id && (

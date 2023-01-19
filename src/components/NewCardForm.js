@@ -14,6 +14,10 @@ const NewCardForm = (props) => {
     setMessage("");
   };
 
+  const resetForm = (event) => {
+    setMessage("");
+  };
+
   return (
     <section>
       <h2>Create a New Card</h2>
@@ -23,19 +27,25 @@ const NewCardForm = (props) => {
         <br />
         <input
           type="text"
+          minLength={1}
+          maxLength={40}
           value={props.message}
           onChange={createNewMessage}
-          className={
-            message.length === 0 || message.length > 50
-              ? "Message required. Do not exceed 50 characters."
-              : ""
-          }
         ></input>
         <p>Preview: {message}</p>
+        <section className="buttonGrid">  
         <input
           type="submit"
           value="Create"
+          className="button"
         ></input>
+        <input
+          type="reset"
+          value="Reset"
+          className="button"
+          onClick={resetForm}
+        ></input>
+        </section>
       </form>
     </section>
   );

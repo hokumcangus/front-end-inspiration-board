@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import PropTypes from 'prop-types';
+import "../styles/App.css";
 
 const NewBoardForm = (props) => {
+  // console.log("new board form props", props)
   const [title, setTitle] = useState("");
   const [owner, setOwner] = useState("");
   const addTitle = (event) => {
@@ -17,19 +20,21 @@ const NewBoardForm = (props) => {
     setOwner("");
   };
 
+  const resetForm = (event) => {
+    setTitle("");
+    setOwner("");
+    };
+
   return (
     <form onSubmit={createNewBoard} className="newBoardForm">
       <label>Title</label>
       <br />
       <input
         type="text"
-        value={title}
+        minLength={1}
+        maxLength={40}
+        value={props.title}
         onChange={addTitle}
-        className={
-          title.length === 0 || title.length > 50
-            ? "Title cannot exceed 50 characters"
-            : ""
-        }
       ></input>
       <br />
       <br />
@@ -37,32 +42,29 @@ const NewBoardForm = (props) => {
       <br />
       <input
         type="text"
-        value={owner}
+        minLength={1}
+        maxLength={40}
+        value={props.owner}
         onChange={addOwner}
-        className={
-          owner.length === 0 || owner.length > 50
-            ? "Owner name(s) cannot exceed 50 characters"
-            : ""
-        }
       ></input>
       <p>
         Preview:
         {title && ` ${title}`}
         {owner && ` - ${owner}`}
       </p>
-      <input
-        type="Submit"
-        disabled={
-          title.length === 0 ||
-          owner.length === 0 ||
-          title.length > 40 ||
-          owner.length > 40
-        }
-        className="new-board-form__form-submit-btn"
-      ></input>
-      <button type="Submit" className="submitBtn">
-        Create
-      </button>
+      <section className="buttonGrid">  
+        <input
+          type="submit"
+          value="Create"
+          className="button"
+        ></input>
+        <input
+          type="reset"
+          value="Reset"
+          className="button"
+          onClick={resetForm}
+        ></input>
+      </section>
     </form>
   );
 };
