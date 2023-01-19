@@ -38,7 +38,7 @@ const CardsList = (props) => {
 			.then((response) => {
 				console.log("in the then response", response)
         const newCardsData = cardsData.filter((deletedCard) => {
-					return deletedCard.cardId !== cardId;
+					return deletedCard.card_id !== cardId;
 				});
 				setCardsData(newCardsData);
 			})
@@ -55,9 +55,10 @@ const CardsList = (props) => {
 			)
 			.then((response) => {
         const newCardsData = cardsData.map((existingCard) => {
-          return existingCard.card_id !== cardId.cardId
+					console.log(cardId.card_id)
+          return existingCard.card_id !== cardId
             ? existingCard
-            : { ...cardId, likesCount: cardId.likesCount + 1 };
+            : { ...cardId, likesCount: cardId.liesCount + 1 };
         });
         // setCardsData(newCardsData);
 				setCardsData(newCardsData);
