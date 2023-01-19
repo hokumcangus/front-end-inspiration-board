@@ -36,7 +36,6 @@ const CardsList = (props) => {
 				console.log("in the then response", response)
         const newCardsData = cardsData.filter((deletedCard) => {
 					return deletedCard.card_id !== card_id;
-					return deletedCard.card_id !== cardId;
 				});
 				setCardsData(newCardsData);
 			})
