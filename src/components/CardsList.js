@@ -7,14 +7,18 @@ import "../styles/CardsList.css";
 
 const CardsList = (props) => {
 	const [cardsData, setCardsData] = useState([]);
-	const [likesCount, setLikesCount] = useState(0);
-	const increaseLikes = () => {
-    setLikesCount((likesCount) => likesCount + 1);
-  };
 
-	// const plusOneLike = () => {
-  //   setLikesCount((likesCount) => likesCount + 1);
-	// };
+	console.log("cards_data", cardsData)
+
+	const onCards = (cardId) => {
+		setCardsData(cardsData.map(card => {
+			if(card.card_id === cardId) {
+					return {...card, likes: card.likes + 1}
+			} else {
+					return card;
+			}
+	}));
+}
 
 	useEffect(() => {
 		axios
@@ -47,25 +51,14 @@ const CardsList = (props) => {
 			});
 	};
 
-	const plusOneLike = (cardId) => {
-    axios
-			.patch(
-				`https://inpiration-board-haam.herokuapp.com/cards/${cardId}/likes`
-			)
-			.then((response) => {
-        const newCardsData = cardsData.map((existingCard) => {
-					console.log(cardId.card_id)
-          return existingCard.card_id !== cardId
-            ? existingCard
-            : { ...cardId, likesCount: cardId.liesCount + 1 };
-        });
-				setCardsData(newCardsData);
-			})
-			.catch((error) => {
-				console.log("Error:", error);
-				alert("Unable to add an additional 'like'");
-			});
-	};
+	const updateLikes = async (cardId) => {
+    try {
+        const res = await axios.patch(`https://inpiration-board-haam.herokuapp.com/boards/${props.board.board_id}/cards/${cardId}`);
+        onCards(cardId);
+    } catch(err) {
+        console.error(err);
+    }
+}
 
 	//Displays each card with like and delete button
 	const cardsList = cardsData.map((card, index) => {
@@ -73,7 +66,8 @@ const CardsList = (props) => {
       <div key={index}>
         <Card
           card={card}
-					plusOneLike={plusOneLike}
+					onCards={onCards}
+					updateLikes={updateLikes}
 					deleteCard={deleteCard}
 				></Card>
       </div>

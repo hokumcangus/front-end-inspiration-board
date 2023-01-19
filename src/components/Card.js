@@ -9,7 +9,7 @@ const Card = (props) => {
 				<p className="message">{props.card.message}</p>
 				<div className="tinyFlexWrapper">
 						<span>{props.card.likes}🧡</span>
-						<button onClick={(event) => props.plusOneLike(props.card.card_id)}>
+						<button onClick={(event) => props.updateLikes(props.card.card_id)}>
 							+🧡
 						</button>
 						<button onClick={(event) => props.deleteCard(props.card.card_id)}>
@@ -22,12 +22,15 @@ const Card = (props) => {
 };
 
 Card.propTypes = {
-  card: (PropTypes.shape({
+  cards: (PropTypes.shape({
     card_id: PropTypes.number,
     likes: PropTypes.number,
     message: PropTypes.string,
   })),
-  plusOneLike: PropTypes.func,
+	totalLikeCnt: PropTypes.func,
+	onCards: PropTypes.func,
+	updateLikes: PropTypes.func,
+  cardLiked: PropTypes.func,
   deleteCard: PropTypes.func
 };
 
