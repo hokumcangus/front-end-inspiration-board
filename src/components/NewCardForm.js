@@ -29,7 +29,7 @@ const NewCardForm = (props) => {
           type="text"
           minLength={1}
           maxLength={40}
-          value={props.message}
+          value={message}
           onChange={createNewMessage}
         ></input>
         <p>Preview: {message}</p>
