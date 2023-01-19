@@ -27,15 +27,15 @@ const CardsList = (props) => {
 			});
 	}, [props.board]);
 	
-	const deleteCard = (boardId, cardId) => {
+	const deleteCard = (board_id, card_id) => {
     axios
 			.delete(
-				`https://inpiration-board-haam.herokuapp.com/boards/${boardID}/cards/${cardId}`
+				`https://inpiration-board-haam.herokuapp.com/boards/${board_id}/cards/${card_id}`
 			)
 			.then((response) => {
 				console.log("in the then response", response)
         const newCardsData = cardsData.filter((deletedCard) => {
-					return deletedCard.card_id !== cardId;
+					return deletedCard.card_id !== card_id;
 				});
 				setCardsData(newCardsData);
 			})
