@@ -36,7 +36,6 @@ const CardsList = (props) => {
 				`https://inpiration-board-haam.herokuapp.com/cards/${cardId}`
 			)
 			.then((response) => {
-				console.log("in the then response", response)
         const newCardsData = cardsData.filter((deletedCard) => {
 					return deletedCard.card_id !== cardId;
 				});

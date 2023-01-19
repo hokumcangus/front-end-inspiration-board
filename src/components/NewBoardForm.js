@@ -12,7 +12,12 @@ const NewBoardForm = (props) => {
   };
   
   const addOwner = (event) => {
-    setOwner(event.target.value);
+    if (event.target.value === "") {
+      throw new Error ("Error: owner name missing");
+			// alert("Please add an owner")
+    } else {
+      setOwner(event.target.value);
+    }
   };
 
   const onFormSubmit = (event) => {
@@ -35,7 +40,7 @@ const NewBoardForm = (props) => {
         type="text"
         minLength={1}
         maxLength={40}
-        value={props.title}
+        value={title}
         onChange={addTitle}
       ></input>
       <br />
@@ -46,7 +51,7 @@ const NewBoardForm = (props) => {
         type="text"
         minLength={1}
         maxLength={40}
-        value={props.owner}
+        value={owner}
         onChange={addOwner}
       ></input>
       <p>

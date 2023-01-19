@@ -26,6 +26,16 @@ function App() {
 		setSelectedBoard(board);
 	};
 
+  const resetSelectBoard = () => {
+    setSelectedBoard(
+      {
+        title: "",
+        owner: "",
+        board_id: null,
+      }
+    )
+  };
+
 	const boardsList = boardsData.map((board, index) => {
 		return (
 			<li key={index}>
@@ -60,7 +70,6 @@ function App() {
 		setIsBoardFormShowing(!isBoardFormShowing);
 	};  
 
-
   const deleteOneBoard = (board_id) => {
     axios
       .delete(
@@ -71,13 +80,13 @@ function App() {
           return deletedBoard.board_id !== board_id;
         });
         setBoardsData(newBoardsData);
+        resetSelectBoard();
       })
       .catch((error) => {
         console.log("Error:", error);
         alert("Unable to delete this board");
     });
   };
-
 
   const deleteAllBoards = (boards) => {
     console.log("this is boards data", boardsData)
@@ -113,7 +122,7 @@ function App() {
 					<section>
 						<h2 className="noBottomMargin">Now Viewing:</h2>
             <div className="deleteBoards"
-              onClick={deleteOneBoard}>
+              onClick={(event) => deleteOneBoard(selectedBoard.board_id)}>
               {selectedBoard.board_id 
                   ? "Delete This Board"
                   : ""}
