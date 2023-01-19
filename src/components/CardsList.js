@@ -7,7 +7,10 @@ import "../styles/CardsList.css";
 
 const CardsList = (props) => {
 	const [cardsData, setCardsData] = useState([]);
-	// const [likesCount, setLikesCount] = useState(0);
+	const [likesCount, setLikesCount] = useState(0);
+	const increaseLikes = () => {
+    setLikesCount((likesCount) => likesCount + 1);
+  };
 
 	// const plusOneLike = () => {
   //   setLikesCount((likesCount) => likesCount + 1);
@@ -30,7 +33,7 @@ const CardsList = (props) => {
 	const deleteCard = (cardId) => {
     axios
 			.delete(
-				`https://inpiration-board-haam.herokuapp.com/boards/${props.board.board_id}/cards/${cardId}`
+				`https://inpiration-board-haam.herokuapp.com/cards/${cardId}`
 			)
 			.then((response) => {
 				console.log("in the then response", response)
@@ -48,7 +51,7 @@ const CardsList = (props) => {
 	const plusOneLike = (cardId) => {
     axios
 			.patch(
-				`https://inpiration-board-haam.herokuapp.com/boards/${props.board.board_id}/cards/${cardId}`
+				`https://inpiration-board-haam.herokuapp.com/cards/${cardId}/likes`
 			)
 			.then((response) => {
         const newCardsData = cardsData.map((existingCard) => {
@@ -65,6 +68,7 @@ const CardsList = (props) => {
 			});
 	};
 
+	//Displays each card with like and delete button
 	const cardsList = cardsData.map((card, index) => {
     return (
       <div  className="cardListFlex" key={index}>
