@@ -5,11 +5,11 @@ import "../styles/Card.css";
 const Card = (props) => {
 	return (
 		<div>
-			<section>
+			<section  className="cardFlex">
 				<p className="message">{props.card.message}</p>
 				<div className="tinyFlexWrapper">
 						<span>{props.card.likes}🧡</span>
-						<button onClick={(event) => props.plusOneLike(props.card.likes)}>
+						<button onClick={(event) => props.plusOneLike(props.card.card_id)}>
 							+🧡
 						</button>
 						<button onClick={(event) => props.deleteCard(props.card.card_id)}>

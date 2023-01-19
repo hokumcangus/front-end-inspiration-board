@@ -89,13 +89,13 @@ function App() {
   };
 
   const deleteAllBoards = (boards) => {
-    console.log("this is boards data", boardsData)
     axios
     .delete(
-      `https://inpiration-board-haam.herokuapp.com/${boardsData}`
+      `https://inpiration-board-haam.herokuapp.com/${boards}`
     )
     .then((response) => {;
-      setBoardsData(response.data.boards);
+      setBoardsData(response.data.boards)
+      resetSelectBoard();
     })
     .catch((error) => {
       console.log("Error:", error);
@@ -104,7 +104,7 @@ function App() {
   };
 
 	return (
-		<div className="mainContainer">
+		<main className="mainContainer">
 			<section>
 				<h1>Inspiration Board</h1>
 			</section>
@@ -113,7 +113,7 @@ function App() {
 					<section>
 						<h2 className="noBottomMargin">List of Boards</h2>
             <div className="deleteBoards"
-              onClick={deleteAllBoards}>
+              onClick={(event) => deleteAllBoards(boardsList)}>
                 Delete All Boards
             </div>
 						<p>Select a board to view from the list below</p>
@@ -163,7 +163,7 @@ function App() {
 			</footer>
 			<script src="./node_modules/axios/dist/axios.min.js"></script>
 			<script src="src/index.js"></script>
-		</div>
+		</main>
 	);
 }
 

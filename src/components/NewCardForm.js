@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from 'prop-types';
+import "../styles/NewForms.css";
+
 
 const NewCardForm = (props) => {
   const [message, setMessage] = useState("");
@@ -9,9 +11,9 @@ const NewCardForm = (props) => {
   };
 
   const onFormSubmit = (event) => {
-    event.preventDefault();
-    props.addNewCard(message);
-    setMessage("");
+      event.preventDefault();
+      props.addNewCard(message);
+      setMessage("");
   };
 
   const resetForm = (event) => {
@@ -19,7 +21,7 @@ const NewCardForm = (props) => {
   };
 
   return (
-    <section>
+    <section className="newCard">
       <h2>Create a New Card</h2>
       <p>Enter details below and click Create</p>
       <form onSubmit={onFormSubmit} className="newCardForm">
@@ -29,6 +31,7 @@ const NewCardForm = (props) => {
           type="text"
           minLength={1}
           maxLength={40}
+          className={!message ? "error" : ""}
           value={message}
           onChange={createNewMessage}
         ></input>
@@ -38,7 +41,8 @@ const NewCardForm = (props) => {
           type="submit"
           value="Create"
           className="button"
-        ></input>
+          disabled={!message}
+          ></input>
         <input
           type="reset"
           value="Reset"

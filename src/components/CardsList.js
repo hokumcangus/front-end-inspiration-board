@@ -59,7 +59,6 @@ const CardsList = (props) => {
             ? existingCard
             : { ...cardId, likesCount: cardId.liesCount + 1 };
         });
-        // setCardsData(newCardsData);
 				setCardsData(newCardsData);
 			})
 			.catch((error) => {
@@ -118,16 +117,19 @@ const CardsList = (props) => {
 };
 
 CardsList.propTypes = {
-  cards: PropTypes.arrayOf(PropTypes.shape({
-    likesCount: PropTypes.number,
-    message: PropTypes.string,
-  })),
+  board: PropTypes.shape({
+    board_id: PropTypes.number,
+    cards: PropTypes.arrayOf(PropTypes.shape({
+      card_id: PropTypes.number,
+      likes: PropTypes.number,
+      message: PropTypes.string
+    })),
+    title: PropTypes.string,
+    owner: PropTypes.string
+  }),
   plusOneLike: PropTypes.func,
   deleteCard: PropTypes.func
-  // deleteOneBoard: PropTypes.func,
-  // deleteAllBoards: PropTypes.func
 };
-  // board
 
 
 export default CardsList;

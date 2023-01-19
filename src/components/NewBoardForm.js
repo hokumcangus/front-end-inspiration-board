@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import PropTypes from 'prop-types';
-import "../styles/App.css";
+import "../styles/NewForms.css";
 
 const NewBoardForm = (props) => {
-  // console.log("new board form props", props)
   const [title, setTitle] = useState("");
   const [owner, setOwner] = useState("");
   
@@ -12,13 +11,8 @@ const NewBoardForm = (props) => {
   };
   
   const addOwner = (event) => {
-    if (event.target.value === "") {
-      throw new Error ("Error: owner name missing");
-			// alert("Please add an owner")
-    } else {
       setOwner(event.target.value);
-    }
-  };
+    };
 
   const onFormSubmit = (event) => {
     event.preventDefault();
@@ -41,6 +35,7 @@ const NewBoardForm = (props) => {
         minLength={1}
         maxLength={40}
         value={title}
+        className={!title ? "error" : ""}
         onChange={addTitle}
       ></input>
       <br />
@@ -52,6 +47,7 @@ const NewBoardForm = (props) => {
         minLength={1}
         maxLength={40}
         value={owner}
+        className={!owner ? "error" : ""}
         onChange={addOwner}
       ></input>
       <p>
@@ -64,6 +60,7 @@ const NewBoardForm = (props) => {
           type="submit"
           value="Create"
           className="button"
+          disabled={!title || !owner}
         ></input>
         <input
           type="reset"
