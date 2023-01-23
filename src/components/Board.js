@@ -6,7 +6,6 @@ const Board = (props) => {
   const onBoardSelect = (event) => {
     props.onSelect(props.board);
     props.displayCards(props.board.board_id);
-    console.log("props", props.board.board_id)
     };
 
   return (
