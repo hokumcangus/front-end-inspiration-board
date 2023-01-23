@@ -28,8 +28,8 @@ Card.propTypes = {
     likes: PropTypes.number,
     message: PropTypes.string,
   })),
-	likesDisplay: PropTypes.func,
-	updateLikesDB: PropTypes.func,
+  likesDisplay: PropTypes.func,
+  updateLikesDB: PropTypes.func,
   deleteOneCard: PropTypes.func
 };
 
