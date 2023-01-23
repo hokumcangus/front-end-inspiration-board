@@ -35,7 +35,6 @@ function App() {
   };  
 
   useEffect(() => {
-    console.log("in the get boards func")
     axios
       .get("https://inpiration-board-haam.herokuapp.com/boards", {})
       .then((response) => {
@@ -46,7 +45,7 @@ function App() {
   const getBoardCards = (board_id) => {
     axios
       .get(
-        "https://inpiration-board-haam.herokuapp.com/boards/${board_id}/cards"
+        `https://inpiration-board-haam.herokuapp.com/boards/${board_id}/cards`
       )
       .then((response) => {
         setCardsData(response.data.cards);
@@ -89,7 +88,7 @@ function App() {
   const deleteOneBoard = (board_id) => {
     axios
       .delete(
-        "https://inpiration-board-haam.herokuapp.com/boards/${board_id}"
+        `https://inpiration-board-haam.herokuapp.com/boards/${board_id}`
       )
       .then((response) => {
         const newBoardsData = boardsData.filter((deletedBoard) => {
@@ -122,7 +121,7 @@ function App() {
   const createNewCard = (message) => {
     axios
       .post(
-        "https://inpiration-board-haam.herokuapp.com/boards/${selectedBoard.board_id}/cards",
+        `https://inpiration-board-haam.herokuapp.com/boards/${selectedBoard.board_id}/cards`,
         { message }
       )
       .then((response) => {
@@ -140,7 +139,7 @@ function App() {
   const deleteCard = (cardId) => {
     axios
       .delete(
-        "https://inpiration-board-haam.herokuapp.com/cards/${cardId}"
+        `https://inpiration-board-haam.herokuapp.com/cards/${cardId}`
       )
       .then((response) => {
         const newCardsData = cardsData.filter((deletedCard) => {
