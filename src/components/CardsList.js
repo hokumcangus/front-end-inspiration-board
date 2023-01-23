@@ -5,35 +5,35 @@ import PropTypes from 'prop-types';
 import "../styles/CardsList.css";
 
 const CardsList = (props) => {
-  
-	const cardsList = props.cards.map((card, index) => {
+
+  const cardsList = props.cards.map((card, index) => {
     return (
       <div key={index}>
         <Card
-          card={card}
-					updateLikesDB={props.onUpdateLikes}
-					deleteOneCard={props.onDeleteCard}
-				></Card>
+        card={card}
+        updateLikesDB={props.onUpdateLikes}
+        deleteOneCard={props.onDeleteCard}
+        ></Card>
       </div>
-		);
-	});
-	
+    );
+  });
+
   return (
-		<section className="lowerGrid">
+    <section className="lowerGrid">
       <section>
         <h2 className="cardsListHeader">
-          Cards for {props.board.title}
+        Cards for {props.board.title}
         </h2>
-				<div className="cardsListInnerGrid">
+        <div className="cardsListInnerGrid">
           {cardsList}
         </div>
       </section>
       <section>  
-				<NewCardForm createNewCard={props.addNewCard}></NewCardForm>
+        <NewCardForm createNewCard={props.addNewCard}></NewCardForm>
       </section>
-		</section>
-	);
-};
+    </section>
+  );
+  };
 
 CardsList.propTypes = {
   board: PropTypes.shape({
