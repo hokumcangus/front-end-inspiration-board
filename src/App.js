@@ -5,8 +5,6 @@ import NewBoardForm from "./components/NewBoardForm";
 import Board from "./components/Board";
 import "./styles/App.css";
 
-const kBaseUrl = process.env.REACT_APP_BE_URL;
-
 function App() {
 
   const [boardsData, setBoardsData] = useState([]);
@@ -37,8 +35,9 @@ function App() {
   };  
 
   useEffect(() => {
+    console.log("in the get boards func")
     axios
-      .get(`${kBaseUrl}/boards`, {})
+      .get("https://inpiration-board-haam.herokuapp.com/boards", {})
       .then((response) => {
         setBoardsData(response.data);
     });
@@ -47,7 +46,7 @@ function App() {
   const getBoardCards = (board_id) => {
     axios
       .get(
-        `${kBaseUrl}/boards/${board_id}/cards`
+        "https://inpiration-board-haam.herokuapp.com/boards/${board_id}/cards"
       )
       .then((response) => {
         setCardsData(response.data.cards);
@@ -73,7 +72,7 @@ function App() {
   const createNewBoard = (newBoard) => {
     axios
       .post(
-        `${kBaseUrl}/boards`, newBoard
+        "https://inpiration-board-haam.herokuapp.com/boards", newBoard
       )
       .then((response) => {
         console.log("Response:", response.data.boards);
@@ -90,7 +89,7 @@ function App() {
   const deleteOneBoard = (board_id) => {
     axios
       .delete(
-        `${kBaseUrl}/boards/${board_id}`
+        "https://inpiration-board-haam.herokuapp.com/boards/${board_id}"
       )
       .then((response) => {
         const newBoardsData = boardsData.filter((deletedBoard) => {
@@ -108,7 +107,7 @@ function App() {
   const deleteAllBoards = (boards) => {
     axios
     .delete(
-      `${kBaseUrl}/boards`
+      "https://inpiration-board-haam.herokuapp.com/boards"
       )
     .then((response) => {;
       setBoardsData([])
@@ -123,7 +122,7 @@ function App() {
   const createNewCard = (message) => {
     axios
       .post(
-        `${kBaseUrl}/boards/${selectedBoard.board_id}/cards`,
+        "https://inpiration-board-haam.herokuapp.com/boards/${selectedBoard.board_id}/cards",
         { message }
       )
       .then((response) => {
@@ -141,7 +140,7 @@ function App() {
   const deleteCard = (cardId) => {
     axios
       .delete(
-        `${kBaseUrl}/cards/${cardId}`
+        "https://inpiration-board-haam.herokuapp.com/cards/${cardId}"
       )
       .then((response) => {
         const newCardsData = cardsData.filter((deletedCard) => {
@@ -157,7 +156,7 @@ function App() {
 
   const updateLikes = async (cardId) => {
     try {
-      const res = await axios.patch(`${kBaseUrl}/boards/${selectedBoard.board_id}/cards/${cardId}`);
+      const res = await axios.patch(`https://inpiration-board-haam.herokuapp.com/boards/${selectedBoard.board_id}/cards/${cardId}`);
       onCardLikes(cardId);
     } catch(err) {
       console.error(err);
