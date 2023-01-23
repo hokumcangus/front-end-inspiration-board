@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import PropTypes from 'prop-types';
 import "../styles/NewForms.css";
 
-
 const NewCardForm = (props) => {
+
   const [message, setMessage] = useState("");
   
   const createNewMessage = (event) => {
@@ -12,7 +12,7 @@ const NewCardForm = (props) => {
 
   const onFormSubmit = (event) => {
       event.preventDefault();
-      props.addNewCard(message);
+      props.createNewCard(message);
       setMessage("");
   };
 
@@ -56,7 +56,7 @@ const NewCardForm = (props) => {
 };
 
 NewCardForm.propTypes = {
-  addNewCard: PropTypes.func
+  createNewCard: PropTypes.func
 };
 
 export default NewCardForm;

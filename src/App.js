@@ -5,24 +5,20 @@ import NewBoardForm from "./components/NewBoardForm";
 import Board from "./components/Board";
 import "./styles/App.css";
 
-function App() {
-	const [boardsData, setBoardsData] = useState([]);
+const kBaseUrl = process.env.REACT_APP_BE_URL;
 
+function App() {
+
+	const [boardsData, setBoardsData] = useState([]);
+  const [cardsData, setCardsData] = useState([]);
 	const [selectedBoard, setSelectedBoard] = useState({
 		title: "",
 		owner: "",
 		board_id: null,
 	});
+  const [isBoardFormShowing, setIsBoardFormShowing] = useState(true);
 
-	useEffect(() => {
-		axios
-			.get("https://inpiration-board-haam.herokuapp.com/boards", {})
-			.then((response) => {
-        setBoardsData(response.data);
-			});
-	}, []);
-
-	const selectBoard = (board) => {
+  const selectBoard = (board) => {
 		setSelectedBoard(board);
 	};
 
@@ -36,12 +32,40 @@ function App() {
     )
   };
 
+  const toggleNewBoardForm = () => {
+		setIsBoardFormShowing(!isBoardFormShowing);
+	};  
+
+	useEffect(() => {
+		axios
+			.get(`${kBaseUrl}/boards`, {})
+			.then((response) => {
+        setBoardsData(response.data);
+			});
+	}, []);
+
+  const getBoardCards = (board_id) => {
+    console.log("board_id", board_id);
+		axios
+			.get(
+				`${kBaseUrl}/boards/${board_id}/cards`
+			)
+			.then((response) => {
+				setCardsData(response.data.cards);
+			})
+			.catch((error) => {
+				console.log("Error:", error);
+				alert("Unable to retrieve cards for this board");
+			});
+	};
+
 	const boardsList = boardsData.map((board, index) => {
 		return (
 			<li key={index}>
 				<Board
 					board={board}
 					onSelect={selectBoard}
+          displayCards={getBoardCards}
 				></Board>
 			</li>
 		);
@@ -51,7 +75,7 @@ function App() {
     console.log("new board", newBoard)
     axios
 			.post(
-				"https://inpiration-board-haam.herokuapp.com/boards", newBoard
+				`${kBaseUrl}/boards`, newBoard
         )
 			.then((response) => {
 				console.log("Response:", response.data.boards);
@@ -65,15 +89,10 @@ function App() {
 			});
 	};
 
-	const [isBoardFormShowing, setIsBoardFormShowing] = useState(true);
-	const toggleNewBoardForm = () => {
-		setIsBoardFormShowing(!isBoardFormShowing);
-	};  
-
   const deleteOneBoard = (board_id) => {
     axios
       .delete(
-        `https://inpiration-board-haam.herokuapp.com/boards/${board_id}`
+        `${kBaseUrl}/boards/${board_id}`
       )
       .then((response) => {
         const newBoardsData = boardsData.filter((deletedBoard) => {
@@ -91,7 +110,7 @@ function App() {
   const deleteAllBoards = (boards) => {
     axios
     .delete(
-      `https://inpiration-board-haam.herokuapp.com/boards`
+      `${kBaseUrl}/boards`
       )
     .then((response) => {;
       setBoardsData([])
@@ -102,6 +121,60 @@ function App() {
       alert("Unable to delete all boards");
     });
   };
+
+  const createNewCard = (message) => {
+		axios
+			.post(
+				`${kBaseUrl}/boards/${selectedBoard.board_id}/cards`,
+				{ message }
+			)
+			.then((response) => {
+        console.log("Response:", response.data.cards);
+        const cards = [...cardsData];
+				cards.push(response.data.cards);
+				setCardsData(cards);
+			})
+			.catch((error) => {
+				console.log("Error:", error);
+				alert("Couldn't create a new card.");
+			});
+	};
+
+  const deleteCard = (cardId) => {
+    axios
+			.delete(
+				`${kBaseUrl}/cards/${cardId}`
+			)
+			.then((response) => {
+        const newCardsData = cardsData.filter((deletedCard) => {
+					return deletedCard.card_id !== cardId;
+				});
+				setCardsData(newCardsData);
+			})
+			.catch((error) => {
+				console.log("Error:", error);
+				alert("Unable to delete the selected card");
+			});
+	};
+
+  const updateLikes = async (cardId) => {
+    try {
+        const res = await axios.patch(`${kBaseUrl}/boards/${selectedBoard.board_id}/cards/${cardId}`);
+        onCardLikes(cardId);
+    } catch(err) {
+        console.error(err);
+    }
+}
+
+const onCardLikes = (cardId) => {
+  setCardsData(cardsData.map(card => {
+    if(card.card_id === cardId) {
+        return {...card, likes: card.likes + 1}
+    } else {
+        return card;
+    }
+}));
+}
 
 	return (
 		<main className="mainContainer">
@@ -152,7 +225,13 @@ function App() {
 					</section>
 				</section>
 				{selectedBoard.board_id && (
-					<CardsList board={selectedBoard}></CardsList>
+					<CardsList 
+          board={selectedBoard}
+          onUpdateLikes={updateLikes}
+          onDeleteCard={deleteCard}
+          addNewCard={createNewCard}
+          cards={cardsData}
+          ></CardsList>
 				)}
 			</section>
 			<footer>
@@ -161,8 +240,6 @@ function App() {
 					Snow Leopards
 				</h3>
 			</footer>
-			<script src="./node_modules/axios/dist/axios.min.js"></script>
-			<script src="src/index.js"></script>
 		</main>
 	);
 }

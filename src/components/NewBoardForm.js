@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import "../styles/NewForms.css";
 
 const NewBoardForm = (props) => {
+  
   const [title, setTitle] = useState("");
   const [owner, setOwner] = useState("");
   
